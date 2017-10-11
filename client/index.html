@@ -2,44 +2,75 @@
   <title>R&D Meteor Whiteboard</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     crossorigin="anonymous">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+ 
 </head>
 
 <body>
   {{> board}}
-</body>
 
+
+
+
+</body>
 <template name="board">
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
         <h1>R&D Meteor Whiteboard</h1>
       </div>
-      <div class="col-xs-8 txt-center">
-        <canvas id="canvas" height="500px" width="600"></canvas>
-      </div>
-      <div class="col-xs-3">
-        <div class="row">
-          <div class="col-xs-12" style="margin-top: 20px">
-            <label>
-              <input type="checkbox" class="isDrawingMode" checked={{isDrawingMode}}>
-               Drawing enabled?
-          </label>
+      <div class="col-xs-10 canvas-wrap">
+        <div class="col-xs-9">
+          <div class="drag">
+            <canvas id="canvas" height="500" width="650"></canvas>
+            <div id="draggable" class="ui-widget-content">
+              <p>Video will go here</p>              
+            </div>
           </div>
-          <div class="col-xs-12" style="margin-top: 20px">
-            <input type="color" class="color" value={{color}}>
-          </div>
-          <div class="col-xs-12" style="margin-top: 20px">
+        </div>
+        <div class="col-xs-3">
+          <div class="row">
+            <div class="col-xs-12" style="margin-top: 20px">
+              <label>
+                  <input type="checkbox" class="isDrawingMode" checked={{isDrawingMode}}>
+                   Drawing enabled?
+              </label>
+            </div>
+            <div class="col-xs-12" style="margin-top: 20px">
+              <input type="color" class="color form-control" value={{color}}>
+            </div>
+            <div class="col-xs-12" style="margin-top: 20px">
 
-            <button class="erase btn btn-info">Erase</button>
-            <button class="draw btn btn-info">draw</button>
+              <button class="erase btn btn-info">Erase</button>
+              <button class="draw btn btn-info">draw</button>
+            </div>
+            <div class="col-xs-12" style="margin-top: 20px">
+              <label for="lineWidth">Line Width</label>
+              <input type="range" value="30" min="0" max="150" class="lineWidth form-control" id="lineWidth">
+            </div>
+            <div class="col-xs-12" style="margin-top: 20px">
+              <button class="clear btn btn-danger">Clear canvas</button>
+            </div>
           </div>
-          <div class="col-xs-12" style="margin-top: 20px">
-            <label for="lineWidth">Line Width</label>
-            <input type="range" value="30" min="0" max="150" class="lineWidth " id="lineWidth">
-          </div>
-          <div class="col-xs-12" style="margin-top: 20px">
-            <button class="clear btn btn-danger">Clear canvas</button>
-          </div>
+        </div>
+      </div>
+      <div class="col-xs-2 ">
+        <div class="users-wrap">
+
+          <h1 class="users">Students</h1>
+          <ul class="list-group">
+            <li class="list-group-item">Santos</li>
+            <li class="list-group-item">Michael</li>
+            <li class="list-group-item">John</li>
+            <li class="list-group-item">Julia</li>
+            <li class="list-group-item">Ali</li>
+            <li class="list-group-item">Santos</li>
+            <li class="list-group-item">Michael</li>
+            <li class="list-group-item">John</li>
+            <li class="list-group-item">Julia</li>
+            <li class="list-group-item">Ali</li>
+          </ul>
         </div>
       </div>
     </div>

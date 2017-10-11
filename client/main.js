@@ -9,6 +9,12 @@ const FabricObjects = new Mongo.Collection('fabricObjects');
 Meteor.subscribe('fabricObjects');
 
 
+Template.board.onRendered(function() {
+  $( function() {
+    $("#draggable" ).draggable();
+  });
+})
+
 Template.board.onCreated(function () {
   this.isDrawingModeVar = new ReactiveVar(true);
   this.colorVar = new ReactiveVar('#000000');
@@ -26,6 +32,7 @@ Template.board.onRendered(function () {
     canvas.isDrawingMode = this.isDrawingModeVar.get();
     canvas.freeDrawingBrush.color = this.colorVar.get();
     canvas.freeDrawingBrush.width = this.lineWidthVar.get();
+
   });
 
   canvas.on('object:added', (e) => {
@@ -126,7 +133,8 @@ Template.board.events({
   }
 });
 
-
 fabric.Canvas.prototype.getObjectById = function (id) {
   return this.getObjects().find(obj => obj.id === id);
 };
+
+
