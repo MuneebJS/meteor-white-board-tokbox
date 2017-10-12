@@ -4,9 +4,33 @@ import { Mongo } from 'meteor/mongo';
 import { Random } from 'meteor/random';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
+import { Session } from 'meteor/session';
 
 const FabricObjects = new Mongo.Collection('fabricObjects');
 Meteor.subscribe('fabricObjects');
+
+
+// dynamic routing
+Meteor.startup(function () {
+  Session.setDefault("templateName", "index")
+});
+
+Template.body.helpers({
+  template_name: function(){
+    return Session.get("templateName")
+  }
+});
+
+Template.body.events({
+  "click .home": function() {
+    Session.set("templateName", "board");
+  },
+  "click .about": function() {
+     Session.set("templateName", "about");
+  }
+});
+
+
 
 
 Template.board.onRendered(function() {
@@ -131,6 +155,8 @@ Template.board.events({
     console.log('draw clicked')
     Template.instance().colorVar.set('#000')
   }
+
+ 
 });
 
 fabric.Canvas.prototype.getObjectById = function (id) {

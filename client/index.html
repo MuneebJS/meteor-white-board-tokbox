@@ -4,75 +4,143 @@
     crossorigin="anonymous">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
- 
+
 </head>
 
 <body>
-  {{> board}}
-
-
-
-
-</body>
-<template name="board">
+  <!-- {{> board}} -->
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <h1>R&D Meteor Whiteboard</h1>
+    {{> Template.dynamic template=template_name }}
+  </div>
+</body>
+
+
+<template name="index">
+    <div class="row"> 
+        <div class="col-md-4 col-md-offset-4 ">
+          <div class="home_btns">
+          <h1 style="text-align: center">Create OR Join</h1>
+          <!-- Signin & Signup -->
+          <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target=".login-register-form">
+            Create 
+        </a> <br>
+          <a href="join" class="btn btn-primary btn-block">
+          Join
+        </a>
       </div>
-      <div class="col-xs-10 canvas-wrap">
-        <div class="col-xs-9">
-          <div class="drag">
-            <canvas id="canvas" height="500" width="650"></canvas>
-            <div id="draggable" class="ui-widget-content">
-              <p>Video will go here</p>              
+    </div>
+  
+        <!-- Login / Register Modal-->
+        <div class="modal fade login-register-form" role="dialog">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </button>
+                <ul class="nav nav-tabs">
+                  <li class="active"><a data-toggle="tab" href="#login-form"> Create <span class="glyphicon glyphicon-new-window"></span></a></li>
+                  <!-- <li><a data-toggle="tab" href="#registration-form"> Register <span class="glyphicon glyphicon-pencil"></span></a></li> -->
+                </ul>
+              </div>
+              <div class="modal-body">
+                <div class="tab-content">
+                  <div id="login-form" class="tab-pane fade in active">
+                    <form action="/">
+                      <div class="form-group">
+                        <label for="email">Your Name:</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name">
+                      </div>
+                      <div class="form-group">
+                        <label for="pwd">Class Name:</label>
+                        <input type="text" class="form-control" id="class_name" placeholder="Enter class name" name="class_name">
+                      </div>
+                      <!-- <div class="checkbox">
+                        <label><input type="checkbox" name="remember"> Remember me</label>
+                      </div> -->
+                      <button type="submit" class="btn btn-default">Create</button>
+                    </form>
+                  </div>
+                  <!-- <div id="registration-form" class="tab-pane fade">
+                    <form action="/">
+                      <div class="form-group">
+                        <label for="name">Your Name:</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name">
+                      </div>
+                      <div class="form-group">
+                        <label for="newemail">Class Name</label>
+                        <input type="email" class="form-control" id="class_name" placeholder="Enter class name" name="class_name">
+                      </div>
+    
+                      <button type="submit" class="btn btn-default">Create</button>
+                    </form>
+                  </div> -->
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-xs-3">
-          <div class="row">
-            <div class="col-xs-12" style="margin-top: 20px">
-              <label>
+      </div>
+</template>
+
+<template name="board">
+  <!-- <div class="container"> -->
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Demo Meteor Whiteboard</h1>
+    </div>
+    <div class="col-xs-10 canvas-wrap">
+      <div class="col-xs-9">
+        <div class="drag">
+          <canvas id="canvas" height="500" width="650"></canvas>
+          <div id="draggable" class="ui-widget-content">
+            <p>Video will go here</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-3">
+        <div class="row">
+          <div class="col-xs-12" style="margin-top: 20px">
+            <label>
                   <input type="checkbox" class="isDrawingMode" checked={{isDrawingMode}}>
                    Drawing enabled?
               </label>
-            </div>
-            <div class="col-xs-12" style="margin-top: 20px">
-              <input type="color" class="color form-control" value={{color}}>
-            </div>
-            <div class="col-xs-12" style="margin-top: 20px">
+          </div>
+          <div class="col-xs-12" style="margin-top: 20px">
+            <input type="color" class="color form-control" value={{color}}>
+          </div>
+          <div class="col-xs-12" style="margin-top: 20px">
 
-              <button class="erase btn btn-info">Erase</button>
-              <button class="draw btn btn-info">draw</button>
-            </div>
-            <div class="col-xs-12" style="margin-top: 20px">
-              <label for="lineWidth">Line Width</label>
-              <input type="range" value="30" min="0" max="150" class="lineWidth form-control" id="lineWidth">
-            </div>
-            <div class="col-xs-12" style="margin-top: 20px">
-              <button class="clear btn btn-danger">Clear canvas</button>
-            </div>
+            <button class="erase btn btn-info">Erase</button>
+            <button class="draw btn btn-info">draw</button>
+          </div>
+          <div class="col-xs-12" style="margin-top: 20px">
+            <label for="lineWidth">Line Width</label>
+            <input type="range" value="30" min="0" max="150" class="lineWidth form-control" id="lineWidth">
+          </div>
+          <div class="col-xs-12" style="margin-top: 20px">
+            <button class="clear btn btn-danger">Clear canvas</button>
           </div>
         </div>
       </div>
-      <div class="col-xs-2 ">
-        <div class="users-wrap">
-
-          <h1 class="users">Students</h1>
-          <ul class="list-group">
-            <li class="list-group-item">Santos</li>
-            <li class="list-group-item">Michael</li>
-            <li class="list-group-item">John</li>
-            <li class="list-group-item">Julia</li>
-            <li class="list-group-item">Ali</li>
-            <li class="list-group-item">Santos</li>
-            <li class="list-group-item">Michael</li>
-            <li class="list-group-item">John</li>
-            <li class="list-group-item">Julia</li>
-            <li class="list-group-item">Ali</li>
-          </ul>
-        </div>
+    </div>
+    <div class="col-xs-2 stdts-wrap">
+      <div class="users-wrap">
+        <h1 class="users">Students</h1>
+        <ul class="list-group">
+          <li class="list-group-item">Santos</li>
+          <li class="list-group-item">Michael</li>
+          <li class="list-group-item">John</li>
+          <li class="list-group-item">Julia</li>
+          <li class="list-group-item">Ali</li>
+          <li class="list-group-item">Santos</li>
+          <li class="list-group-item">Michael</li>
+          <li class="list-group-item">John</li>
+          <li class="list-group-item">Julia</li>
+          <li class="list-group-item">Ali</li>
+        </ul>
       </div>
     </div>
   </div>
+  <!-- </div> -->
 </template>
